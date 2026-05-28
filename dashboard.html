@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<title>Mini NMS</title>
+
+<meta http-equiv="refresh" content="5">
+
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+
+<body>
+
+<div class="navbar">
+
+<h1>Mini Network Monitoring Dashboard</h1>
+
+<p>Total Devices: {{ device_count }}</p>
+
+<p>Last Updated: {{ last_updated }}</p>
+
+</div>
+
+<div class="container">
+
+<div class="main-layout">
+
+    <!-- LEFT SIDE -->
+    <div class="devices-section">
+
+        {% for d in data %}
+
+        <div class="card">
+
+            <h2>{{ d.device }}</h2>
+
+            <div class="metric">
+                Status
+
+                {% if d.status == "ONLINE" %}
+                <span style="color:#00ff88;">🟢 ONLINE</span>
+
+                {% else %}
+                <span style="color:red;">🔴 OFFLINE</span>
+                {% endif %}
+            </div>
+
+            <div class="metric">
+                CPU
+
+                <span class="
+                {% if d.cpu|float > 80 %}
+                danger
+
+                {% elif d.cpu|float > 60 %}
+                warning
+
+                {% else %}
+                healthy
+
+                {% endif %}
+                ">
+                {{ d.cpu }}%
+                </span>
+
+            </div>
+
+            <div class="metric">
+                Memory
+
+                <span class="
+                {% if d.memory|float > 80 %}
+                danger
+
+                {% elif d.memory|float > 60 %}
+                warning
+
+                {% else %}
+                healthy
+
+                {% endif %}
+                ">
+                {{ d.memory }}%
+                </span>
+
+            </div>
+
+            <div class="metric">
+                Disk
+                <span>{{ d.disk }}</span>
+            </div>
+
+            <div class="metric">
+                Uptime
+                <span>{{ d.uptime }}</span>
+            </div>
+
+            <h3>Routes</h3>
+
+            <div class="route-box">
+
+                {% for route in d.routes %}
+
+                <div class="route-item">
+                    {{ route }}
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+            <h3>Open Ports</h3>
+
+            <table>
+
+                <tr>
+                    <th>Protocol</th>
+                    <th>State</th>
+                    <th>Port</th>
+                </tr>
+
+                {% for p in d.ports %}
+
+                <tr>
+                    <td>{{ p.protocol }}</td>
+                    <td>{{ p.state }}</td>
+                    <td>{{ p.local }}</td>
+                </tr>
+
+                {% endfor %}
+
+            </table>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+
+
+    <!-- RIGHT SIDE -->
+    <div class="graphs-section">
+
+        <div class="card graph-card">
+
+            <h2>CPU Usage History</h2>
+
+            <div id="cpuChart" style="height:300px;"></div>
+
+        </div>
+
+        <div class="card graph-card">
+
+            <h2>Memory Usage History</h2>
+
+            <div id="memChart" style="height:300px;"></div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+var cpu = {{ cpu_history|tojson }};
+var mem = {{ mem_history|tojson }};
+
+
+Plotly.newPlot(
+
+'cpuChart',
+
+[{
+
+    y: {{ cpu_history|safe }},
+
+    mode:'lines+markers',
+
+    name:'CPU',
+
+    line:{
+        width:4,
+        shape:'spline'
+    },
+
+    marker:{
+        size:8
+    },
+
+    fill:'tozeroy'
+
+}],
+
+{
+
+    title:'',
+
+    paper_bgcolor:'#1b2a4a',
+
+    plot_bgcolor:'#1b2a4a',
+
+    font:{
+        color:'white',
+        size:14
+    },
+
+    margin:{
+        l:50,
+        r:20,
+        t:20,
+        b:40
+    },
+
+    yaxis:{
+        range:[0,100],
+        gridcolor:'#2d3e66'
+    },
+
+    xaxis:{
+        gridcolor:'#2d3e66'
+    }
+
+},
+
+{
+
+    responsive:true
+
+}
+
+)
+
+
+
+Plotly.newPlot(
+
+'memChart',
+
+[{
+
+    y: {{ mem_history|safe }},
+
+    mode:'lines+markers',
+
+    name:'Memory',
+
+    line:{
+        width:4,
+        shape:'spline'
+    },
+
+    marker:{
+        size:8
+    },
+
+    fill:'tozeroy',
+
+    line:{
+        width:4,
+        shape:'spline'
+}
+
+}],
+
+{
+
+    title:'',
+
+    paper_bgcolor:'#1b2a4a',
+
+    plot_bgcolor:'#1b2a4a',
+
+    font:{
+        color:'white',
+        size:14
+    },
+
+    margin:{
+        l:50,
+        r:20,
+        t:20,
+        b:40
+    },
+
+    yaxis:{
+        range:[0,100],
+        gridcolor:'#2d3e66'
+    },
+
+    xaxis:{
+        gridcolor:'#2d3e66'
+    }
+
+},
+
+{
+
+    responsive:true
+
+}
+
+)
+
+
+
+</script>
+
+<footer>
+
+Mini-NMS | Built with Python, Flask, Paramiko & Plotly
+
+</footer>
+
+</body>
+
+</html>

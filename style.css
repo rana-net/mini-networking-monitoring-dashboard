@@ -1,0 +1,217 @@
+body{
+
+    background:#001133;
+
+    color:white;
+
+    font-family:Arial;
+
+    margin:0;
+
+    padding:20px;
+
+}
+
+
+h1{
+
+    text-align:center;
+
+    color:#00ffff;
+
+    margin-bottom:40px;
+
+}
+
+
+.container{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:20px;
+
+    justify-content:center;
+
+}
+
+
+.card{
+    background:#13264b;
+    padding:20px;
+    border-radius:18px;
+    box-shadow:0 0 15px rgba(0,0,0,0.4);
+    min-height:650px;
+}
+
+
+.metric{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    padding:10px 0;
+
+    border-bottom:1px solid gray;
+
+    font-size:20px;
+
+}
+
+
+pre{
+
+    background:#000d26;
+
+    padding:10px;
+
+    border-radius:10px;
+
+    overflow-x:auto;
+
+    font-size:14px;
+
+}
+
+
+.healthy{
+
+    color:#00ff99;
+
+    font-weight:bold;
+
+}
+
+
+.warning{
+
+    color:orange;
+
+    font-weight:bold;
+
+}
+
+
+.danger{
+
+    color:red;
+
+    font-weight:bold;
+
+}
+
+pre{
+
+    max-height:200px;
+
+    overflow-y:auto;
+
+}
+
+.navbar{
+
+    background:#071633;
+
+    padding:25px;
+
+    border-radius:15px;
+
+    margin-bottom:25px;
+
+    text-align:center;
+
+    box-shadow:0 0 15px rgba(0,0,0,0.5);
+
+}
+
+table {
+
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+
+}
+
+th {
+
+    background: #00ffff;
+    color: black;
+    padding: 10px;
+
+}
+
+td {
+
+    padding: 8px;
+    border-bottom: 1px solid #444;
+    text-align: center;
+
+}
+
+.route-box {
+
+    background: #081229;
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 10px;
+
+}
+
+.route-item {
+
+    margin-bottom: 5px;
+    color: #00ffcc;
+
+}
+
+.graph-card {
+
+    background: #1b2a4a;
+
+    padding: 20px;
+
+    border-radius: 20px;
+
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+
+    height: 420px;
+
+}
+
+.js-plotly-plot {
+
+    height: 320px !important;
+
+}
+
+footer{
+
+    text-align:center;
+
+    color:#8aa0c8;
+
+    margin-top:40px;
+
+    padding:20px;
+
+    font-size:14px;
+
+}
+
+.main-layout{
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap:20px;
+    padding:20px;
+    align-items:start;
+}
+
+.devices-section{
+    display:contents;
+}
+
+.graphs-section{
+    display:contents;
+}

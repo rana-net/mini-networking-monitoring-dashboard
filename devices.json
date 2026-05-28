@@ -1,0 +1,20 @@
+{
+  "devices": [
+
+    {
+      "name": "Ubuntu VM",
+      "host": "192.168.56.101",
+      "port": 22,
+      "username": "rana-roy",
+      "password": "Rana@0008"
+    },
+    {
+      "name": "Kali Linux",
+      "host": "192.168.56.102",
+      "port": 22,
+      "username": "rana-roy",
+      "password": "Rana@0008"
+    }
+    
+  ]
+}
